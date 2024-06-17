@@ -10,7 +10,7 @@ Route::get('/', [PrincipalController::class, 'principal']);
 Route::get('/contato', [ContatoController::class, 'contato']);
 
 Route::get('/sobrenos', [SobreNosController::class, 'sobreNos']);
-
+//tESTANDO COMMIT
 
 //nome , categoria, assunto, mensagemm
 Route::get('/contato/{nome}/{categoria}/{assunto}/{mensagem?}', 
