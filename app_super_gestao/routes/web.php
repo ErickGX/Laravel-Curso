@@ -13,13 +13,30 @@ Route::get('/login' , function(){ return 'login';})->name('site.login');
 //names sao utilizados apenas dentro da logica da aplicacao, utilziando o helper  {{ route('site.index') }}, alterações nao refletem as rotas absolutas usando esse metodo
 //qualquer alteração na rota diretamente /contato , posso mudar para /qualquer coisa que o helper ainda continua apontando para a rota absoluta
 
-//agrupamento de rotas a partir de um prefixo comum / separar partes da aplicacoes
-Route::prefix('/app')->group(function(){
+Route::prefix('/app')->group(function(){ //agrupamento de rotas a partir de um prefixo comum / separar partes da aplicacoes
 
         Route::get('/clientes' , function(){ return 'clientes';})->name('app.clientes');
         Route::get('/fornecedores' , function(){ return 'fornecedores';})->name('app.fornecedores');
         Route::get('/produtos' , function(){ return 'produtos';})->name('app.produtos');
 });
+
+Route::get('/rota1', function(){
+        echo 'rota1';
+})->name('site.rota1');
+
+Route::get('/rota2', function(){
+        return redirect()->route('site.rota1');        
+})->name('site.rota2');
+
+
+//qualquer rota nao existente acessada o usuario sera redirecionado para esta rota de contigencia , uma view trabalhada pode ser usada etc.
+Route::fallback(function(){
+        echo 'A rota acessada não existe. <a href="'.route('site.index').'"> clique aqui </a> para a página indicada';
+});
+
+
+//metodo redirect diretamente um dos meios
+//Route::redirect('/rota2', '/rota1');
 
 
 
